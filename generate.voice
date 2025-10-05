@@ -1,0 +1,25 @@
+# src/tts/generate_voice.py
+import boto3
+
+def generate_voice(text, mood, output_path='narration.mp3'):
+    polly = boto3.client('polly')
+    voice_map = {
+        'inspiratif': 'Joanna',
+        'edukatif': 'Brian',
+        'dramatis': 'Emma'
+    }
+    voice_id = voice_map.get(mood, 'Joanna')
+    
+    response = polly.synthesize_speech(
+        Text=text,
+        OutputFormat='mp3',
+        VoiceId=voice_id
+    )
+    with open(output_path, 'wb') as f:
+        f.write(response['AudioStream'].read())
+    print(f"Voice-over saved to {output_path}")
+
+if __name__ == "__main__":
+    sample_text = "Gagal adalah batu loncatan menuju keberhasilan."
+    mood = 'inspiratif'
+    generate_voice(sample_text, mood)
