@@ -1,0 +1,16 @@
+# src/analysis/mood_detection.py
+from textblob import TextBlob
+
+def detect_mood(text):
+    analysis = TextBlob(text)
+    polarity = analysis.sentiment.polarity
+    if polarity > 0.3:
+        return 'inspiratif'
+    elif polarity < -0.3:
+        return 'dramatis'
+    else:
+        return 'edukatif'
+
+if __name__ == "__main__":
+    sample_text = "Keberanian untuk gagal adalah langkah pertama menuju sukses."
+    print(f"Detected mood: {detect_mood(sample_text)}")
