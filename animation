@@ -1,0 +1,15 @@
+# src/animation/scene_creator.py
+# Pseudo-code untuk otomatisasi animasi dengan Blender
+import bpy
+
+def create_scene():
+    # Tambahkan latar belakang
+    bpy.ops.mesh.primitive_plane_add(size=10, location=(0, 0, 0))
+    # Import model karakter (harus sudah disiapkan)
+    # Atur pose dan ekspresi
+    # Tambahkan kamera dan atur gerakan dinamis
+    # Render scene menjadi video
+    bpy.ops.render.render(animation=True)
+
+if __name__ == "__main__":
+    create_scene()
