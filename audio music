@@ -1,0 +1,14 @@
+# src/video/merge_audio_music.py
+import subprocess
+
+def add_background_music(video_path, music_path, output_path='final_output.mp4'):
+    command = (
+        f"ffmpeg -i {video_path} -i {music_path} "
+        f"-filter_complex \"[0:a][1:a]amix=inputs=2:duration=first:dropout_transition=2\" "
+        f"-c:v copy -c:a aac {output_path}"
+    )
+    subprocess.call(command, shell=True)
+    print(f"Video dengan musik selesai: {output_path}")
+
+if __name__ == "__main__":
+    add_background_music('embed_subtitles.mp4', 'background_music.mp3')
