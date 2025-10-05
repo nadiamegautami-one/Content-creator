@@ -1,0 +1,17 @@
+# src/subtitle/sync_subtitles.py
+import subprocess
+
+def generate_subtitles(audio_path, video_path, output_srt='subtitles.srt'):
+    # Menggunakan autosub (harus di-install di environment)
+    command = f"autosub {audio_path} --output {output_srt}"
+    subprocess.call(command, shell=True)
+    print(f"Subtitles generated: {output_srt}")
+
+def embed_subtitles(video_path, subtitle_path, output_path='final_video.mp4'):
+    command = f"ffmpeg -i {video_path} -vf subtitles={subtitle_path} {output_path}"
+    subprocess.call(command, shell=True)
+    print(f"Final video with subtitles: {output_path}")
+
+if __name__ == "__main__":
+    generate_subtitles('narration.mp3', 'animated_scene.mp4')
+    embed_subtitles('animated_scene.mp4', 'subtitles.srt')
